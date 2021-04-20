@@ -382,36 +382,18 @@ class _StepperState extends State<Stepper> with TickerProviderStateMixin {
 
     assert(cancelColor != null);
 
-    final ThemeData themeData = Theme.of(context);
-    final MaterialLocalizations localizations =
-        MaterialLocalizations.of(context);
-
     return Container(
       margin: const EdgeInsets.only(top: 16.0),
-      child: ConstrainedBox(
-        constraints: const BoxConstraints.tightFor(height: 48.0),
-        child: Row(
-          children: <Widget>[
-            FlatButton(
-              onPressed: widget.onStepContinue,
-              color: _isDark()
-                  ? themeData.backgroundColor
-                  : themeData.primaryColor,
-              textColor: Colors.white,
-              textTheme: ButtonTextTheme.normal,
-              child: Text(localizations.continueButtonLabel),
-            ),
-            if (widget.currentStep != 0)
-              Container(
-                margin: const EdgeInsetsDirectional.only(start: 8.0),
-                child: FlatButton(
-                  onPressed: widget.onStepCancel,
-                  textColor: cancelColor,
-                  textTheme: ButtonTextTheme.normal,
-                  child: Text(localizations.cancelButtonLabel),
-                ),
-              ),
-          ],
+      child: Align(alignment: Alignment.bottomRight,
+        child: FloatingActionButton(
+          onPressed: widget.onStepContinue,
+          child: Icon(
+            Icons.arrow_forward,
+            color: Colors.white,
+          ),
+          backgroundColor: Theme
+              .of(context)
+              .accentColor,
         ),
       ),
     );
